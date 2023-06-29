@@ -1,7 +1,9 @@
 "use client";
+
 import Start from "@/components/startPage/Start";
 // import Signup from "@/components/signupPage/Signup";
 // import Login from "@/components/loginPage/Login"
+// import Dashboard from "@/components/dashBoardPage/Dashboard";
 
 export default function Home() {
   return (
@@ -9,6 +11,7 @@ export default function Home() {
       <Start />
       {/* <Signup /> */}
       {/* <Login /> */}
+      {/* <Dashboard /> */}
     </main>
   );
 }

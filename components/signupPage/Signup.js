@@ -2,8 +2,11 @@
 import { collection, addDoc } from "firebase/firestore";
 import { useState } from "react";
 import { db } from "@/utils/FirebaseConfig";
+import { useRouter } from "next/navigation";
 
 const Signup = () => {
+  const router = useRouter();
+
   const [userData, setUserData] = useState({
     firstName: "",
     lastName: "",
@@ -27,10 +30,21 @@ const Signup = () => {
         lastName: userData.lastName,
         userName: userData.userName,
         phoneNo: userData.phoneNo,
-        emailAddess: userData.emailAddress,
+        emailAddress: userData.emailAddress,
         country: userData.country,
         password: userData.password,
         confirmPassword: userData.confirmPassword,
+      });
+      await router.push("/login");
+      await setUserData({
+        firstName: "",
+        lastName: "",
+        userName: "",
+        phoneNo: "",
+        emailAddress: "",
+        country: "",
+        password: "",
+        confirmPassword: "",
       });
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -125,6 +139,17 @@ const Signup = () => {
           Submit
         </button>
       </div>
+
+      <p>
+        Already have an account?{" "}
+        <spann>
+          <button
+            className="mt-10 hover:bg-slate-500"
+            onClick={() => router.push("/login")}>
+            Login
+          </button>
+        </spann>
+      </p>
     </form>
   );
 };

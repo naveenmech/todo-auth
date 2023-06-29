@@ -10,7 +10,7 @@ const Start = () => {
         Log in
       </button>
       <button
-        onClick={() => router.push("/signup")}
+        onClick={() => router.push("/Signup")}
         className="btn btn-active btn-primary">
         Sign up
       </button>

@@ -89,7 +89,7 @@ const Login = () => {
         <span className="gap-2">
           <button
             className="mt-10 hover:bg-slate-500 gap-4"
-            onClick={() => router.push("/signup")}>
+            onClick={() => router.push("/Signup")}>
             Signup
           </button>
         </span>

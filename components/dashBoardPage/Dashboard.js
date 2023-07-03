@@ -1,7 +1,13 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Dashboard = () => {
+  const router = useRouter();
+  const handleonclick = () => {
+    localStorage.removeItem("users");
+    router.push("/");
+  };
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -25,11 +31,14 @@ const Dashboard = () => {
               data-dropdown-toggle="user-dropdown"
               data-dropdown-placement="bottom">
               <span className="sr-only">Open user menu</span>
-              <img
+              {/* <img
                 className="w-8 h-8 rounded-full"
                 src="/docs/images/people/profile-picture-3.jpg"
                 alt="user photo"
-              />
+              /> */}
+              <button className="px-5 py-5" onClick={handleonclick}>
+                Logout
+              </button>
             </button>
             {/* <!-- Dropdown menu --> */}
             <div

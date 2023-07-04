@@ -1,6 +1,7 @@
 "use client";
 import Dashboard from "@/components/dashBoardPage/Dashboard";
 import Todo from "@/components/todoPage/Todo";
+import withAuth from "@/components/withAuthPage/withAuth";
 import React from "react";
 
 const page = () => {
@@ -12,4 +13,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default withAuth(page);

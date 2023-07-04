@@ -9,7 +9,6 @@ import { db } from "@/utils/FirebaseConfig";
 // use router
 
 import { useRouter } from "next/navigation";
-import withAuth from "../withAuthPage/withAuth";
 
 const Login = () => {
   const [emailAddress, setEmailAddress] = useState("");
@@ -36,10 +35,10 @@ const Login = () => {
 
     valuesss.forEach((value) => {
       if (value.emailAddress === emailAddress && value.password === password) {
-        router.push("/dashboard");
         localStorage.setItem("users", JSON.stringify({ emailAddress }));
+        router.push("/dashboard");
       } else {
-        router.push("/");
+        router.push("/login");
         console.log("Signin failed");
         // console.log(value);
         // console.log(emailAddress);
@@ -100,4 +99,4 @@ const Login = () => {
   );
 };
 
-export default withAuth(Login);
+export default Login;

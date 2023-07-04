@@ -12,7 +12,7 @@ export default function withAuth(Component) {
       if (!userIsAuthenticated) {
         router.push("/login");
       }
-    }, [userIsAuthenticated, router]);
+    }, []);
 
     return <Component {...props} />;
   };

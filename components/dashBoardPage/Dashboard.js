@@ -37,11 +37,6 @@ const Dashboard = () => {
                 alt="user photo"
               /> */}
 
-              {/* <button
-                className="px-3 py-3 rounded-none"
-                onClick={handleonclick}>
-                Logout
-              </button> */}
               <button
                 className="px-3 py-3 rounded-none"
                 onClick={handleonclick}>

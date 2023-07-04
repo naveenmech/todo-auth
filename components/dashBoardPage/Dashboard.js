@@ -36,10 +36,14 @@ const Dashboard = () => {
                 src="/docs/images/people/profile-picture-3.jpg"
                 alt="user photo"
               /> */}
-              <button className="px-5 py-5" onClick={handleonclick}>
+
+              <button
+                className="px-3 py-3 rounded-none"
+                onClick={handleonclick}>
                 Logout
               </button>
             </button>
+
             {/* <!-- Dropdown menu --> */}
             <div
               className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"

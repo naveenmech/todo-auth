@@ -1,6 +1,5 @@
 "use client";
 import { useRouter } from "next/navigation";
-import withAuth from "../withAuthPage/withAuth";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -155,4 +154,4 @@ const Dashboard = () => {
   );
 };
 
-export default withAuth(Dashboard);
+export default Dashboard;

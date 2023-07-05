@@ -19,13 +19,20 @@ const Todo = () => {
   const value = collection(db, "todo");
   const [id, setId] = useState("");
   const [show, setShow] = useState(false);
-  useEffect(() => {
-    const getData = async () => {
-      const dbval = await getDocs(value);
+
+  const getData = async () => {
+    const dbval = await getDocs(value);
+    dbval.docs.length > 0 &&
       setVal(dbval.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
+  };
+  useEffect(() => {
     getData();
-  }, [val]);
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getData();
+  };
   const handleCreate = async () => {
     await addDoc(value, { fname: firstname, lname: lastname });
   };
@@ -50,7 +57,9 @@ const Todo = () => {
     setLastname("");
   };
   return (
-    <div className="flex flex-col items-center justify-center mt-5 gap-10">
+    <form
+      onClick={handleSubmit}
+      className="flex flex-col items-center justify-center mt-5 gap-10">
       <div>
         <div>
           <label
@@ -117,7 +126,7 @@ const Todo = () => {
           </div>
         ))}
       </div>
-    </div>
+    </form>
   );
 };
 

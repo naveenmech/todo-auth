@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 //firebase
 
-import { db } from "@/utils/FirebaseConfig";
+import { db } from "../../utils/FirebaseConfig";
 
 // use router
 
@@ -18,16 +18,15 @@ const Login = () => {
 
   const router = useRouter();
   const value = collection(db, "users");
-
+  const getData = async () => {
+    const dbValuesss = await getDocs(value);
+    await setValuesss(
+      dbValuesss.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    );
+  };
   useEffect(() => {
-    const getData = async () => {
-      const dbValuesss = await getDocs(value);
-      setValuesss(
-        dbValuesss.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      );
-    };
     getData();
-    console.log(valuesss);
+    // console.log(valuesss);
   }, []);
 
   const LoginUser = (e) => {
@@ -87,9 +86,9 @@ const Login = () => {
 
       <p>
         Don't have an account?
-        <span className="gap-2">
+        <span>
           <button
-            className="mt-10 hover:bg-slate-500 gap-4"
+            className="ml-1 mt-10 hover:bg-slate-500 gap-4"
             onClick={() => router.push("/Signup")}>
             Signup
           </button>

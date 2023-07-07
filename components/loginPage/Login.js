@@ -30,10 +30,10 @@ const Login = () => {
     val.forEach((value) => {
       if (value.emailAddress === emailAddress && value.password === password) {
         localStorage.setItem("users", JSON.stringify({ emailAddress }));
-        // console.log(value.email);
+        console.log("Login Success");
       } else {
         router.push("/login");
-        console.log("Login failed");
+        // console.log("Login failed");
       }
     });
   };

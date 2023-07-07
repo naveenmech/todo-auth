@@ -1,50 +1,43 @@
 "use client";
 import { collection, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
-
-//firebase
-
-import { db } from "../../utils/FirebaseConfig";
-
-// use router
-
+import { useContext, useEffect, useState } from "react";
+import { db } from "@/utils/FirebaseConfig";
 import { useRouter } from "next/navigation";
-
+import { UserContext } from "@/contextPage/userContext";
 const Login = () => {
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
-
-  const [valuesss, setValuesss] = useState([]);
+  const [val, setVal] = useState([]);
 
   const router = useRouter();
+
+  const { userLogin } = useContext(UserContext);
+
   const value = collection(db, "users");
   const getData = async () => {
-    const dbValuesss = await getDocs(value);
-    await setValuesss(
-      dbValuesss.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-    );
+    const dbVal = await getDocs(value);
+    await setVal(dbVal.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    // console.log(val);
   };
   useEffect(() => {
     getData();
-    // console.log(valuesss);
   }, []);
 
-  const LoginUser = (e) => {
+  const LoginUser = async (e) => {
     e.preventDefault();
+    userLogin(emailAddress, password);
 
-    valuesss.forEach((value) => {
+    val.forEach((value) => {
       if (value.emailAddress === emailAddress && value.password === password) {
         localStorage.setItem("users", JSON.stringify({ emailAddress }));
-        router.push("/dashboard");
+        // console.log(value.email);
       } else {
         router.push("/login");
-        console.log("Signin failed");
-        // console.log(value);
-        // console.log(emailAddress);
-        // console.log(password);
+        console.log("Login failed");
       }
     });
   };
+
   return (
     <form
       onSubmit={LoginUser}
@@ -53,14 +46,15 @@ const Login = () => {
         <label className="input-group">
           <span className="w-[6.6rem]">Email</span>
           <input
-            type="text"
+            type="email"
+            name="emailAddress"
             value={emailAddress}
             placeholder="info@site.com"
             className="input input-bordered "
-            required
             onChange={(e) => {
               setEmailAddress(e.target.value);
             }}
+            required
           />
         </label>
       </div>
@@ -70,13 +64,14 @@ const Login = () => {
           <span>Password</span>
           <input
             value={password}
+            name="password"
             type="password"
             placeholder="xxxx"
             className="input input-bordered"
-            required
             onChange={(e) => {
               setPassword(e.target.value);
             }}
+            required
           />
         </label>
       </div>

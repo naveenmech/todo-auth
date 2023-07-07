@@ -1,11 +1,13 @@
 "use client";
 import { collection, addDoc } from "firebase/firestore";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { db } from "@/utils/FirebaseConfig";
 import { useRouter } from "next/navigation";
+import { UserContext } from "@/contextPage/userContext";
 
 const Signup = () => {
   const router = useRouter();
+  const { userCreate } = useContext(UserContext);
 
   const [userData, setUserData] = useState({
     firstName: "",
@@ -35,7 +37,8 @@ const Signup = () => {
         password: userData.password,
         confirmPassword: userData.confirmPassword,
       });
-      await router.push("/login");
+      await userCreate(userData.emailAddress, userData.password);
+
       await setUserData({
         firstName: "",
         lastName: "",

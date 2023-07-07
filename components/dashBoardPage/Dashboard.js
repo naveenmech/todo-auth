@@ -5,6 +5,8 @@ const Dashboard = () => {
   const router = useRouter();
   const handleonclick = () => {
     localStorage.removeItem("users");
+    localStorage.removeItem("userUid");
+
     router.push("/");
   };
   return (
@@ -22,7 +24,7 @@ const Dashboard = () => {
             </span>
           </a>
           <div className="flex items-center md:order-2">
-            <button
+            <div
               type="button"
               className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
               id="user-menu-button"
@@ -41,7 +43,7 @@ const Dashboard = () => {
                 onClick={handleonclick}>
                 Logout
               </button>
-            </button>
+            </div>
 
             {/* <!-- Dropdown menu --> */}
             <div

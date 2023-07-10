@@ -22,6 +22,7 @@ const Todo = () => {
   const getData = async () => {
     // const dbval = await getDocs(value);
     // dbval.docs.length > 0 &&
+    setVal([]);
 
     const q = query(collection(db, "todo"), where("uid", "==", uid));
 
@@ -45,11 +46,15 @@ const Todo = () => {
   };
   const handleCreate = async () => {
     await addDoc(value, { fname: firstname, lname: lastname, uid: uid });
+    setFirstname("");
+    setLastname("");
   };
 
   const handleDelete = async (id) => {
     const deleteValue = doc(db, "todo", id);
     await deleteDoc(deleteValue);
+    getData();
+    // setVal([]);
   };
 
   const handleEdit = async (id, fname, lname) => {
@@ -102,12 +107,14 @@ const Todo = () => {
 
         {!show ? (
           <button
+            type="submit"
             onClick={handleCreate}
             className="text-lg font-semibold rounded-md bg-gray-700 text-white px-6 py-2 cursor-pointer hover:bg-gray-300 hover:text-gray-800">
             Create
           </button>
         ) : (
           <button
+            type="submit"
             onClick={handleUpdate}
             className="text-lg font-semibold rounded-md bg-gray-700 text-white px-6 py-2 cursor-pointer hover:bg-gray-300 hover:text-gray-800">
             Update
